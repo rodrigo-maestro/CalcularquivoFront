@@ -10,27 +10,42 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;  
-    row-gap: 1vh;
+    row-gap: 2vh;
 }
 
-div.block{
+.block{
     height: 10vh;
     width: 15vw;    
     display: flex;
     align-items: center;
-    justify-content: center;      
+    justify-content: center;     
 }
 
-div.block p {
-    font-family: Arial, Helvetica, sans-serif;
-    font-size: 3vh;
-    color: #4997b1;
+.btn{
+    border: none;
+    box-shadow: 0 1vh 0vh -0.2vh #b1b1b1;
+}
+
+.btn:hover{
+    background-color: #1e6c86;
+    color: #add8e6;
+}
+
+.btn:active{
+    box-shadow: 0 0.5vh #7a7a7a;
+    transform: translateY(0.5vh);
 }
 
 .colorCobaltBlue {
-    background-color: #ADD8E6;
+    background-color: #add8e6;
 }
 
 .colorGray {
     background-color: #b8b8b8;
+}
+
+.font {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 3vh;
+    color: #4997b1;
 }
