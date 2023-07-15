@@ -1,5 +1,5 @@
 const fileInput = document.getElementById('my_file');
-const url = 'http://localhost:3000';
+const url = 'http://127.0.0.1:5000';
 
 function getFile(){
     fileInput.click();
@@ -16,8 +16,6 @@ fileInput.addEventListener('change', (e) => {
         alert("only files smaller than 2MB")
     }
     
-    console.log(file);
-
     sendFile(file);
 });
 
@@ -29,10 +27,10 @@ function sendFile(file){
     const formData = new FormData();
     formData.append('file', file);
 
-    fetch(url+'/upload', {
+    fetch(url+'/arquivos', {
         method: 'POST',
         headers: {
-            'Content-type': 'application/json'
+            
         },
         body: formData 
     })
