@@ -6,6 +6,8 @@ function getFile(){
 }
 
 fileInput.addEventListener('change', (e) => {
+    console.log("ola evento")
+
     const file = e.target.files[0];
     
     if (!file || file == null) {
@@ -19,9 +21,12 @@ fileInput.addEventListener('change', (e) => {
     sendFile(file);
 
     newElement();
+
+    fileInput.value = null;
 });
 
 function sendFile(file){
+    console.log("ola");
     if (!file || file == null) {
         return;
     }
