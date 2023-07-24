@@ -17,6 +17,8 @@ fileInput.addEventListener('change', (e) => {
     }
     
     sendFile(file);
+
+    newElement();
 });
 
 function sendFile(file){
@@ -49,4 +51,28 @@ function sendFile(file){
         console.log("Error: ", error);
     })
 
+}
+
+var close = document.getElementsByClassName("spanClose")
+var i = 0;
+
+function newElement() {
+    var li = document.createElement("li");
+    var t = document.createTextNode("TESTE");
+    li.appendChild(t);
+    
+    document.getElementById("fileUL").appendChild(li);
+
+    var span = document.createElement("span");
+    var txt = document.createTextNode("\u00D7");
+    span.className = "spanClose";
+    span.appendChild(txt);
+    li.appendChild(span);
+
+    for (i == 0; i < close.length; i++) {
+        close[i].onclick = function() {
+            var div = this.parentElement;
+            div.style.diplay = "none";
+        }
+    }
 }
