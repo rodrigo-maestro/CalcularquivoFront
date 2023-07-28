@@ -5,6 +5,8 @@ function getFile(){
     fileInput.click();
 }
 
+obterDadosArquivos();
+
 fileInput.addEventListener('change', (e) => {
     console.log("ola evento")
 
@@ -20,7 +22,7 @@ fileInput.addEventListener('change', (e) => {
     
     sendFile(file);
 
-    newElement();
+    //loadElements();
 
     fileInput.value = null;
 });
@@ -58,26 +60,50 @@ function sendFile(file){
 
 }
 
-var close = document.getElementsByClassName("spanClose")
-var i = 0;
-
-function newElement() {
-    var li = document.createElement("li");
-    var t = document.createTextNode("TESTE");
-    li.appendChild(t);
+function loadElements(itens) {
+    var i = 0;
+    for (i == 0; i < itens.length; i ++) {
+        console.log(itens[i])
+        var li = document.createElement("li");
+        var t = document.createTextNode(itens[i]);
+        li.appendChild(t);
+        
+        document.getElementById("fileUL").appendChild(li);
     
-    document.getElementById("fileUL").appendChild(li);
-
-    var span = document.createElement("span");
-    var txt = document.createTextNode("\u00D7");
-    span.className = "spanClose";
-    span.appendChild(txt);
-    li.appendChild(span);
-
-    for (i == 0; i < close.length; i++) {
-        close[i].onclick = function() {
+        var span = document.createElement("span");
+        var txt = document.createTextNode("\u00D7");
+        span.className = "spanClose";        
+        span.appendChild(txt);
+        span.onclick = function() {
             var div = this.parentElement;
             div.style.diplay = "none";
         }
+        li.appendChild(span);    
     }
+}
+
+function obterDadosArquivos() {
+    fetch(url+'/obterDadosArquivos', {
+        method: 'GET',
+        headers: {
+
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            console.log("Error");
+        }
+    })
+    .then (data => {
+        console.log("Server response: ", data);
+        if (data.arquivos) {
+            loadElements(data.arquivos);
+        }
+    })
+    .catch(error => {
+        console.log("Error: ", error);
+    })
 }
