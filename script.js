@@ -63,13 +63,13 @@ function sendFile(file){
 function loadElements(itens) {
     var i = 0;
     for (i == 0; i < itens.length; i ++) {
-        console.log(itens[i])
+        if (!itens[i] || !itens[i].nome) {
+            continue;
+        }
         var li = document.createElement("li");
-        var t = document.createTextNode(itens[i]);
+        var t = document.createTextNode(itens[i].nome);
         li.appendChild(t);
-        
-        document.getElementById("fileUL").appendChild(li);
-    
+
         var span = document.createElement("span");
         var txt = document.createTextNode("\u00D7");
         span.className = "spanClose";        
@@ -79,6 +79,26 @@ function loadElements(itens) {
             div.style.diplay = "none";
         }
         li.appendChild(span);    
+
+        if (itens[i].linhas && itens[i].linhas.length > 0) {
+            var ul = document.createElement("ul")
+            createSubItens(ul, itens[i].linhas);
+
+            li.appendChild(ul);
+        }
+        
+        document.getElementById("fileUL").appendChild(li);
+    }
+}
+
+function createSubItens(ul, linhas) {    
+    var i = 0;
+    for (i == 0; i < linhas.length; i++) {
+        var li = document.createElement("li");
+        var t = document.createTextNode(linhas[i]);
+        li.appendChild(t);
+
+        ul.appendChild(li);
     }
 }
 
