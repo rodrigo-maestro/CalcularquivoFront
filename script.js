@@ -68,7 +68,11 @@ function loadElements(itens) {
         }
         var li = document.createElement("li");
         var t = document.createTextNode(itens[i].nome);
-        li.appendChild(t);
+
+        var div = document.createElement("div");
+        div.className = "divArquivo"
+
+        div.appendChild(t);
 
         var span = document.createElement("span");
         var txt = document.createTextNode("\u00D7");
@@ -78,10 +82,13 @@ function loadElements(itens) {
             var div = this.parentElement;
             div.style.diplay = "none";
         }
-        li.appendChild(span);    
+        div.appendChild(span);
+        
+        li.appendChild(div);
 
         if (itens[i].linhas && itens[i].linhas.length > 0) {
             var ul = document.createElement("ul")
+            ul.className = "child-list"
             createSubItens(ul, itens[i].linhas);
 
             li.appendChild(ul);
@@ -95,8 +102,10 @@ function createSubItens(ul, linhas) {
     var i = 0;
     for (i == 0; i < linhas.length; i++) {
         var li = document.createElement("li");
+        var div = document.createElement("div");
         var t = document.createTextNode(linhas[i]);
-        li.appendChild(t);
+        div.appendChild(t);
+        li.appendChild(div);
 
         ul.appendChild(li);
     }

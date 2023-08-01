@@ -1,16 +1,19 @@
+.body {
+    background-color: #4997b1;
+}
+
 .rounded {
     border-radius: 1vw;    
 }
 
 .container {
-    height: 100vh;
-    width: 100vw;
-    background: #4997b1;
+    background-color: #4997b1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;  
-    row-gap: 2vh;
+    row-gap: 5vh;
+    padding-top: 25vh;
 }
 
 .block{
@@ -54,4 +57,49 @@
 
 #my_file {
     display: none;
+}
+
+.divArquivo {
+    padding-bottom: 1vw;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.parent-list li {
+    width: 20vw;
+    padding: 1vw;
+    background: #3371ab;
+    font-size: 2.5vh;
+    transition: 0.2s;
+}
+
+.parent-list li:nth-child(odd) {
+    background: #56adff;
+}
+
+.child-list li {
+    padding: 1vw 1vw 1vw 0vw;
+    background: #7b7b7b;
+    font-size: 2.0vh;
+    transition: 0.2s;
+}
+
+.child-list li div {
+    padding-left: 0.25vw;
+}
+
+.child-list li:nth-child(odd) {
+    background: #acacac;
+}
+
+.spanClose {
+    cursor: pointer;
+    padding: 0.5vw 0.75vw;
+}
+
+.spanClose:hover {
+    background-color: #f44336;
+    color: white;
 }
