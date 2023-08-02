@@ -22,8 +22,6 @@ fileInput.addEventListener('change', (e) => {
     
     sendFile(file);
 
-    //loadElements();
-
     fileInput.value = null;
 });
 
@@ -61,33 +59,36 @@ function sendFile(file){
 }
 
 function loadElements(itens) {
-    var i = 0;
-    for (i == 0; i < itens.length; i ++) {
+    loadFilesList(itens);
+}
+
+function loadFilesList(itens) {
+    for (let i = 0; i < itens.length; i ++) {
         if (!itens[i] || !itens[i].nome) {
             continue;
         }
-        var li = document.createElement("li");
-        var t = document.createTextNode(itens[i].nome);
+        const li = document.createElement("li");
+        const t = document.createTextNode(itens[i].nome);
 
-        var div = document.createElement("div");
+        const div = document.createElement("div");
         div.className = "divArquivo"
 
         div.appendChild(t);
 
-        var span = document.createElement("span");
-        var txt = document.createTextNode("\u00D7");
+        const span = document.createElement("span");
+        const txt = document.createTextNode("\u00D7");
         span.className = "spanClose";        
         span.appendChild(txt);
+        li.dataset.object = JSON.stringify(itens[i]);
         span.onclick = function() {
-            var div = this.parentElement;
-            div.style.diplay = "none";
+            console.log(li.dataset.object);
         }
         div.appendChild(span);
         
         li.appendChild(div);
 
         if (itens[i].linhas && itens[i].linhas.length > 0) {
-            var ul = document.createElement("ul")
+            const ul = document.createElement("ul")
             ul.className = "child-list"
             createSubItens(ul, itens[i].linhas);
 
@@ -99,11 +100,10 @@ function loadElements(itens) {
 }
 
 function createSubItens(ul, linhas) {    
-    var i = 0;
-    for (i == 0; i < linhas.length; i++) {
-        var li = document.createElement("li");
-        var div = document.createElement("div");
-        var t = document.createTextNode(linhas[i]);
+    for (let i = 0; i < linhas.length; i++) {
+        const li = document.createElement("li");
+        const div = document.createElement("div");
+        const t = document.createTextNode(linhas[i]);
         div.appendChild(t);
         li.appendChild(div);
 
@@ -129,7 +129,7 @@ function obterDadosArquivos() {
     .then (data => {
         console.log("Server response: ", data);
         if (data.arquivos) {
-            loadElements(data.arquivos);
+            loadFilesList(data.arquivos);
         }
     })
     .catch(error => {
