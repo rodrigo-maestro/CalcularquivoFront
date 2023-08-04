@@ -1,19 +1,18 @@
-.body {
+body {
     background-color: #4997b1;
-}
-
-.rounded {
-    border-radius: 1vw;    
 }
 
 .container {
-    background-color: #4997b1;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;  
     row-gap: 5vh;
     padding-top: 25vh;
+}
+
+.rounded {
+    border-radius: 1vw;    
 }
 
 .block{

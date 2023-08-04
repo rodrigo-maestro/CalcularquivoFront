@@ -76,13 +76,22 @@ function loadFilesList(itens) {
         div.appendChild(t);
 
         const span = document.createElement("span");
+        span.className = "spanClose";
+
         const txt = document.createTextNode("\u00D7");
-        span.className = "spanClose";        
+        
         span.appendChild(txt);
+        
         li.dataset.object = JSON.stringify(itens[i]);
+
         span.onclick = function() {
-            console.log(li.dataset.object);
+            if (li.dataset.object) {
+                deletarArquivo(JSON.parse(li.dataset.object).nome);
+
+                li.remove();
+            }
         }
+
         div.appendChild(span);
         
         li.appendChild(div);
@@ -102,9 +111,11 @@ function loadFilesList(itens) {
 function createSubItens(ul, linhas) {    
     for (let i = 0; i < linhas.length; i++) {
         const li = document.createElement("li");
+
         const div = document.createElement("div");
         const t = document.createTextNode(linhas[i]);
         div.appendChild(t);
+
         li.appendChild(div);
 
         ul.appendChild(li);
@@ -130,6 +141,26 @@ function obterDadosArquivos() {
         console.log("Server response: ", data);
         if (data.arquivos) {
             loadFilesList(data.arquivos);
+        }
+    })
+    .catch(error => {
+        console.log("Error: ", error);
+    })
+}
+
+function deletarArquivo(nomeArquivo) {
+    fetch(url+'/deletarArquivo/'+nomeArquivo, {
+        method:'DELETE',
+        headers: {
+
+        }
+    })
+    .then(response => {
+        if (response.ok) {
+            return response.json();
+        }
+        else {
+            console.log("Error");
         }
     })
     .catch(error => {
